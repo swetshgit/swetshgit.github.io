@@ -629,18 +629,65 @@
             }
         }
 
-        .content-chooser { text-align: center; padding-bottom: 32px; }
-        .content-choices { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
-        .content-choice { min-width: 150px; cursor: pointer; font-family: inherit; background: var(--card); color: var(--muted); }
-        .content-choice[aria-pressed="true"] { border-color: var(--purple); color: var(--purple-light); box-shadow: 0 0 24px var(--electric-glow); }
-        .content-choice:focus-visible { outline: 2px solid var(--purple-light); outline-offset: 4px; }
-        .content-panel[hidden] { display: none; }
-        .content-panel { opacity: 1; transition: opacity 220ms ease; }
-        .content-panel.is-fading { opacity: 0; }
-        .blog-empty { padding: 28px; border: 1px solid var(--border); border-radius: 14px; background: var(--card); }
-        .blog-empty p { color: var(--muted); }
+        .content-chooser {
+            text-align: center;
+            padding-bottom: 32px;
+        }
+
+        .content-choices {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .content-choice {
+            min-width: 150px;
+            cursor: pointer;
+            font-family: inherit;
+            background: var(--card);
+            color: var(--muted);
+        }
+
+        .content-choice[aria-pressed="true"] {
+            border-color: var(--purple);
+            color: var(--purple-light);
+            box-shadow: 0 0 24px var(--electric-glow);
+        }
+
+        .content-choice:focus-visible {
+            outline: 2px solid var(--purple-light);
+            outline-offset: 4px;
+        }
+
+        .content-panel[hidden] {
+            display: none;
+        }
+
+        .content-panel {
+            opacity: 1;
+            transition: opacity 220ms ease;
+        }
+
+        .content-panel.is-fading {
+            opacity: 0;
+        }
+
+        .blog-empty {
+            padding: 28px;
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            background: var(--card);
+        }
+
+        .blog-empty p {
+            color: var(--muted);
+        }
+
         @media (prefers-reduced-motion: reduce) {
-            .content-panel { transition: none; }
+            .content-panel {
+                transition: none;
+            }
         }
 
         #compact-header {
@@ -648,44 +695,132 @@
             inset: 0 0 auto;
             animation: header-appear 180ms ease-out;
         }
-        #compact-header[hidden] { display: none; }
-        @keyframes header-appear {
-            from { opacity: 0; }
-            to { opacity: 1; }
+
+        #compact-header[hidden] {
+            display: none;
         }
 
-        [hidden] { display: none !important; }
-        main { transition: opacity 180ms ease; }
-        main.is-switching { opacity: 0; pointer-events: none; }
-        body.detail-view main { padding-top: 90px; min-height: 100vh; }
-        body.detail-view .content-chooser { padding-top: 24px; }
-        h1[tabindex="-1"]:focus, h2[tabindex="-1"]:focus { outline: none; }
-        @media (prefers-reduced-motion: reduce) {
-            main { transition: none; }
+        @keyframes header-appear {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
         }
+
+        [hidden] {
+            display: none !important;
+        }
+
+        main {
+            transition: opacity 180ms ease;
+        }
+
+        main.is-switching {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        body.detail-view main {
+            padding-top: 90px;
+            min-height: 100vh;
+        }
+
+        body.detail-view .content-chooser {
+            padding-top: 24px;
+        }
+
+        h1[tabindex="-1"]:focus,
+        h2[tabindex="-1"]:focus {
+            outline: none;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            main {
+                transition: none;
+            }
+        }
+
         .home-action {
             display: flex;
             justify-content: center;
             margin-top: 36px;
         }
 
-        .home-search { padding-bottom: 36px; max-width: 800px; }
-        .home-search label { display: block; }
-        .search-field { display: flex; gap: 12px; }
+        .home-search {
+            padding-bottom: 36px;
+            max-width: 800px;
+        }
+
+        .home-search label {
+            display: block;
+        }
+
+        .search-field {
+            display: flex;
+            gap: 12px;
+        }
+
         .search-field input {
-            flex: 1; min-width: 0; padding: 14px 18px; border-radius: 12px;
-            border: 1px solid var(--border); background: var(--card);
-            color: var(--text); font: inherit;
+            flex: 1;
+            min-width: 0;
+            padding: 14px 18px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            background: var(--card);
+            color: var(--text);
+            font: inherit;
         }
-        .search-field button { cursor: pointer; background: var(--card); color: var(--purple-light); font-family: inherit; }
-        .search-field input:focus-visible, .search-results a:focus-visible {
-            outline: 2px solid var(--purple); outline-offset: 3px;
+
+        .search-field button {
+            cursor: pointer;
+            background: var(--card);
+            color: var(--purple-light);
+            font-family: inherit;
         }
-        .search-results { list-style: none; padding: 0; margin: 20px 0 0; }
-        .search-results li { border-bottom: 1px solid var(--border); padding: 18px 0; }
-        .search-results a { display: block; color: var(--purple-light); font-weight: 600; }
-        .search-results a:hover { text-decoration: underline; }
-        .search-results p { color: var(--muted); margin: 8px 0 0; font-size: .9rem; }
+
+        .search-field input:focus-visible,
+        .search-results a:focus-visible {
+            outline: 2px solid var(--purple);
+            outline-offset: 3px;
+        }
+
+        .search-results {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0 0;
+        }
+
+        .search-results li {
+            border-bottom: 1px solid var(--border);
+            padding: 18px 0;
+        }
+
+        .search-results a {
+            display: block;
+            color: var(--purple-light);
+            font-weight: 600;
+        }
+
+        .search-results a:hover {
+            text-decoration: underline;
+        }
+
+        .search-results p {
+            color: var(--muted);
+            margin: 8px 0 0;
+            font-size: .9rem;
+        }
+
+        .wiki-content { max-width: 850px; }
+        .wiki-list { padding-left: 24px; margin: 28px 0; }
+        .wiki-list li { padding: 12px 0; color: var(--purple); }
+        .wiki-list h3 { font-size: 1.1rem; margin: 0 0 8px; }
+        .wiki-list a { color: var(--purple-light); text-decoration: underline; text-underline-offset: 4px; }
+        .wiki-list p { color: var(--muted); margin: 0; overflow-wrap: anywhere; }
+        .wiki-list article:focus { outline: 2px solid var(--purple); outline-offset: 6px; }
     </style>
 </head>
 
@@ -733,17 +868,18 @@
                     <button class="button" type="submit">Search</button>
                 </div>
             </form>
-            <p id="search-status" class="section-intro" role="status" aria-live="polite">Search by keyword to find related work. Blog posts are coming soon.</p>
+            <p id="search-status" class="section-intro" role="status" aria-live="polite">Search by keyword to find
+                related work. Blog posts are coming soon.</p>
             <ul id="search-results" class="search-results" aria-label="Search findings" hidden></ul>
         </section>
 
         <nav class="container content-chooser" aria-label="Explore my work">
             <p class="eyebrow">What would you like to explore?</p>
             <div class="content-choices">
-                <button type="button" class="button content-choice" id="projects-choice"
-                    data-view="projects" aria-controls="projects" aria-pressed="false">Projects</button>
-                <button type="button" class="button content-choice" id="blogs-choice"
-                    data-view="blogs" aria-controls="blogs" aria-pressed="false">Blogs</button>
+                <button type="button" class="button content-choice" id="projects-choice" data-view="projects"
+                    aria-controls="projects" aria-pressed="false">Projects</button>
+                <button type="button" class="button content-choice" id="blogs-choice" data-view="blogs"
+                    aria-controls="blogs" aria-pressed="false">Blogs</button>
             </div>
         </nav>
         <section class="section content-panel" id="projects" aria-labelledby="projects-choice" hidden>
@@ -766,7 +902,7 @@
                         <span class="project-number">01 / AI</span>
                         <h3>AI Applications</h3>
                         <p>AI-powered applications, agents, and intelligent tools.</p>
-                        <a class="project-link" href="mailto:your.email@example.com?subject=AI%20Applications">
+                        <a class="project-link" href="#ai-wiki">
                             View Projects <span>→</span>
                         </a>
                     </article>
@@ -816,7 +952,7 @@
                         <span class="project-number">06 / GPU</span>
                         <h3>CUDA &amp; GPU Computing</h3>
                         <p>GPU kernels, parallel algorithms, memory optimization, and benchmarking.</p>
-                        <a class="project-link" href="mailto:your.email@example.com?subject=CUDA">
+                        <a class="project-link" href="#cuda-wiki">
                             View Projects <span>→</span>
                         </a>
                     </article>
@@ -895,6 +1031,9 @@
                 </div>
             </div>
         </section>
+
+        <section class="section content-panel wiki-page" id="ai-wiki" aria-labelledby="ai-wiki-title" hidden><div class="container wiki-content"><p class="eyebrow">Project Wiki</p><h2 id="ai-wiki-title">AI Applications</h2><ul class="wiki-list"><li><article id="ai-wiki-1"><h3><a href="https://www.pneumaai.app/" target="_blank" rel="noopener noreferrer">PneumaAI</a></h3><p>https://www.pneumaai.app/</p></article></li><li><article id="ai-wiki-2"><h3><a href="https://clear-path-ten.vercel.app/" target="_blank" rel="noopener noreferrer">Clear Path</a></h3><p>https://clear-path-ten.vercel.app/</p></article></li><li><article id="ai-wiki-3"><h3><a href="https://devpost.com/software/project-capital" target="_blank" rel="noopener noreferrer">Project Capital (Hackathon project)</a></h3><p>https://devpost.com/software/project-capital</p></article></li></ul><a class="project-link" href="wiki/ai-applications.md">View Markdown source &rarr;</a><div class="home-action"><a class="button" href="#projects">Back to Projects</a></div><div class="home-action"><a class="button" href="#home">Return to Home &uarr;</a></div></div></section>
+        <section class="section content-panel wiki-page" id="cuda-wiki" aria-labelledby="cuda-wiki-title" hidden><div class="container wiki-content"><p class="eyebrow">Project Wiki</p><h2 id="cuda-wiki-title">CUDA &amp; GPU Computing</h2><ul class="wiki-list"><li><article id="cuda-wiki-1"><h3><a href="https://github.com/swetshgit/CUDA_Experiments" target="_blank" rel="noopener noreferrer">Early introduction</a></h3><p>https://github.com/swetshgit/CUDA_Experiments</p></article></li><li><article id="cuda-wiki-2"><h3><a href="https://github.com/swetshgit/DL2025_CUDA_Exercise" target="_blank" rel="noopener noreferrer">CO2 emissions CNN-GRU and LSTM optimizer</a></h3><p>https://github.com/swetshgit/DL2025_CUDA_Exercise</p></article></li></ul><a class="project-link" href="wiki/cuda-gpu-computing.md">View Markdown source &rarr;</a><div class="home-action"><a class="button" href="#projects">Back to Projects</a></div><div class="home-action"><a class="button" href="#home">Return to Home &uarr;</a></div></div></section>
     </main>
 
     <script>
@@ -910,7 +1049,7 @@
         function renderView(animate = true) {
             clearTimeout(pending);
             const [route, resultId] = location.hash.slice(1).split('/');
-            const view = ['projects', 'blogs'].includes(route) ? route : null;
+            const view = ['projects', 'blogs', 'ai-wiki', 'cuda-wiki'].includes(route) ? route : null;
             main.classList.toggle('is-switching', animate && !reducedMotion.matches);
 
             pending = setTimeout(() => {
@@ -924,7 +1063,7 @@
                     panel.classList.remove('is-fading');
                 });
                 choices.forEach(button => {
-                    button.setAttribute('aria-pressed', String(button.dataset.view === view));
+                    button.setAttribute('aria-pressed', String(button.dataset.view === view || (view?.endsWith('-wiki') && button.dataset.view === 'projects')));
                 });
                 // Reset the new view instantly; navigation itself uses a fade.
                 window.scrollTo({ top: 0, behavior: 'instant' });
@@ -965,7 +1104,7 @@
             }
 
             // Index visible content from every entry, including future blog articles.
-            const entries = [...document.querySelectorAll('#projects article, #blogs article')];
+            const entries = [...document.querySelectorAll('#projects article, #blogs article, .wiki-page article')];
             const findings = entries.map((entry, index) => {
                 const title = entry.querySelector('h3, h2')?.textContent.trim() || 'Untitled';
                 const description = entry.querySelector('p')?.textContent.trim() || '';
@@ -974,7 +1113,7 @@
                 const score = matched.reduce((total, term) => total + (title.toLowerCase().includes(term) ? 3 : 1), 0);
                 return { entry, index, title, description, matched, score };
             }).filter(item => item.score > 0)
-              .sort((a, b) => b.matched.length - a.matched.length || b.score - a.score || a.index - b.index);
+                .sort((a, b) => b.matched.length - a.matched.length || b.score - a.score || a.index - b.index);
 
             searchStatus.textContent = findings.length
                 ? findings.length + (findings.length === 1 ? ' finding' : ' findings') + ' matching your keywords. Blog posts are coming soon.'
@@ -985,7 +1124,7 @@
                 const row = document.createElement('li');
                 const link = document.createElement('a');
                 link.href = '#' + view + '/' + item.entry.id;
-                link.textContent = item.title + ' ? ' + (view === 'projects' ? 'Projects' : 'Blogs');
+                link.textContent = item.title + ' / ' + (view === 'blogs' ? 'Blogs' : 'Projects');
                 const description = document.createElement('p');
                 description.textContent = item.description;
                 const matches = document.createElement('p');
