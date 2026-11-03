@@ -19,6 +19,7 @@
 
     <style>
         :root {
+            --page-scale: 0.6;
             color-scheme: dark;
             --bg: #050711;
             --surface: #0a0e1b;
@@ -51,6 +52,8 @@
         }
 
         body {
+            zoom: var(--page-scale);
+            color: var(--text);
             background:
                 radial-gradient(ellipse at 15% 10%,
                     rgba(205, 166, 120, 0.10),
@@ -625,16 +628,80 @@
                 animation-duration: .01ms !important;
             }
         }
+
+        .content-chooser { text-align: center; padding-bottom: 32px; }
+        .content-choices { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+        .content-choice { min-width: 150px; cursor: pointer; font-family: inherit; background: var(--card); color: var(--muted); }
+        .content-choice[aria-pressed="true"] { border-color: var(--purple); color: var(--purple-light); box-shadow: 0 0 24px var(--electric-glow); }
+        .content-choice:focus-visible { outline: 2px solid var(--purple-light); outline-offset: 4px; }
+        .content-panel[hidden] { display: none; }
+        .content-panel { opacity: 1; transition: opacity 220ms ease; }
+        .content-panel.is-fading { opacity: 0; }
+        .blog-empty { padding: 28px; border: 1px solid var(--border); border-radius: 14px; background: var(--card); }
+        .blog-empty p { color: var(--muted); }
+        @media (prefers-reduced-motion: reduce) {
+            .content-panel { transition: none; }
+        }
+
+        #compact-header {
+            position: fixed;
+            inset: 0 0 auto;
+            animation: header-appear 180ms ease-out;
+        }
+        #compact-header[hidden] { display: none; }
+        @keyframes header-appear {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        [hidden] { display: none !important; }
+        main { transition: opacity 180ms ease; }
+        main.is-switching { opacity: 0; pointer-events: none; }
+        body.detail-view main { padding-top: 90px; min-height: 100vh; }
+        body.detail-view .content-chooser { padding-top: 24px; }
+        h1[tabindex="-1"]:focus, h2[tabindex="-1"]:focus { outline: none; }
+        @media (prefers-reduced-motion: reduce) {
+            main { transition: none; }
+        }
+        .home-action {
+            display: flex;
+            justify-content: center;
+            margin-top: 36px;
+        }
+
+        .home-search { padding-bottom: 36px; max-width: 800px; }
+        .home-search label { display: block; }
+        .search-field { display: flex; gap: 12px; }
+        .search-field input {
+            flex: 1; min-width: 0; padding: 14px 18px; border-radius: 12px;
+            border: 1px solid var(--border); background: var(--card);
+            color: var(--text); font: inherit;
+        }
+        .search-field button { cursor: pointer; background: var(--card); color: var(--purple-light); font-family: inherit; }
+        .search-field input:focus-visible, .search-results a:focus-visible {
+            outline: 2px solid var(--purple); outline-offset: 3px;
+        }
+        .search-results { list-style: none; padding: 0; margin: 20px 0 0; }
+        .search-results li { border-bottom: 1px solid var(--border); padding: 18px 0; }
+        .search-results a { display: block; color: var(--purple-light); font-weight: 600; }
+        .search-results a:hover { text-decoration: underline; }
+        .search-results p { color: var(--muted); margin: 8px 0 0; font-size: .9rem; }
     </style>
 </head>
 
 <body>
+    <header id="compact-header" hidden>
+        <div class="container nav">
+            <a class="brand" href="#home" aria-label="Swetank's World, back to top">Swetank's <span>World</span></a>
+        </div>
+    </header>
     <main>
         <section class="container hero" id="home">
             <div>
                 <p class="eyebrow">Explorer / Builder / Researcher</p>
 
                 <h1>Swetank's <span>World</span></h1>
+
 
                 <p class="hero-subtitle">
                     AI | ML | GPU Computing | Quantitative Research
@@ -655,7 +722,31 @@
             </div>
         </section>
 
-        <section class="section" id="projects">
+
+
+        <section class="container home-search" id="home-search" aria-labelledby="search-label">
+            <form role="search" id="search-form">
+                <label class="eyebrow" id="search-label" for="keyword-search">Search projects &amp; blogs</label>
+                <div class="search-field">
+                    <input type="search" id="keyword-search" placeholder="Try GPU, learning, or vision"
+                        autocomplete="off" aria-controls="search-results" aria-describedby="search-status">
+                    <button class="button" type="submit">Search</button>
+                </div>
+            </form>
+            <p id="search-status" class="section-intro" role="status" aria-live="polite">Search by keyword to find related work. Blog posts are coming soon.</p>
+            <ul id="search-results" class="search-results" aria-label="Search findings" hidden></ul>
+        </section>
+
+        <nav class="container content-chooser" aria-label="Explore my work">
+            <p class="eyebrow">What would you like to explore?</p>
+            <div class="content-choices">
+                <button type="button" class="button content-choice" id="projects-choice"
+                    data-view="projects" aria-controls="projects" aria-pressed="false">Projects</button>
+                <button type="button" class="button content-choice" id="blogs-choice"
+                    data-view="blogs" aria-controls="blogs" aria-pressed="false">Blogs</button>
+            </div>
+        </nav>
+        <section class="section content-panel" id="projects" aria-labelledby="projects-choice" hidden>
             <div class="container">
                 <div class="section-heading">
                     <div>
@@ -741,8 +832,30 @@
                     </article>
                 </div>
             </div>
+            <div class="container home-action">
+                <a class="button" href="#home">Return to Home <span aria-hidden="true">&uarr;</span></a>
+            </div>
         </section>
 
+
+        <section class="section content-panel" id="blogs" aria-labelledby="blogs-choice" hidden>
+            <div class="container">
+                <div class="section-heading">
+                    <div>
+                        <p class="eyebrow">Notes &amp; Ideas</p>
+                        <h2>Blogs</h2>
+                        <p class="section-intro">Thoughts on AI, machine learning, and computation.</p>
+                    </div>
+                </div>
+                <div class="blog-empty">
+                    <h3>Coming soon</h3>
+                    <p>New posts will appear here.</p>
+                </div>
+            </div>
+            <div class="container home-action">
+                <a class="button" href="#home">Return to Home <span aria-hidden="true">&uarr;</span></a>
+            </div>
+        </section>
         <section class="section" id="about">
             <div class="container">
                 <div class="section-heading">
@@ -783,6 +896,114 @@
             </div>
         </section>
     </main>
+
+    <script>
+        const choices = [...document.querySelectorAll('[data-view]')];
+        const panels = [...document.querySelectorAll('.content-panel')];
+        const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+        const compactHeader = document.getElementById('compact-header');
+        const main = document.querySelector('main');
+        const hero = document.getElementById('home');
+        const about = document.getElementById('about');
+        let pending;
+
+        function renderView(animate = true) {
+            clearTimeout(pending);
+            const [route, resultId] = location.hash.slice(1).split('/');
+            const view = ['projects', 'blogs'].includes(route) ? route : null;
+            main.classList.toggle('is-switching', animate && !reducedMotion.matches);
+
+            pending = setTimeout(() => {
+                compactHeader.hidden = !view;
+                document.body.classList.toggle('detail-view', Boolean(view));
+                hero.hidden = Boolean(view);
+                about.hidden = Boolean(view);
+                document.getElementById('home-search').hidden = Boolean(view);
+                panels.forEach(panel => {
+                    panel.hidden = panel.id !== view;
+                    panel.classList.remove('is-fading');
+                });
+                choices.forEach(button => {
+                    button.setAttribute('aria-pressed', String(button.dataset.view === view));
+                });
+                // Reset the new view instantly; navigation itself uses a fade.
+                window.scrollTo({ top: 0, behavior: 'instant' });
+                main.classList.remove('is-switching');
+                const result = resultId && view ? document.getElementById(resultId) : null;
+                if (result && document.getElementById(view).contains(result)) {
+                    result.setAttribute('tabindex', '-1');
+                    result.scrollIntoView({ behavior: 'instant', block: 'center' });
+                    result.focus({ preventScroll: true });
+                } else if (animate) {
+                    const heading = document.querySelector(view ? '#' + view + ' h2' : '#home h1');
+                    heading.setAttribute('tabindex', '-1');
+                    heading.focus({ preventScroll: true });
+                }
+            }, animate && !reducedMotion.matches ? 180 : 0);
+        }
+
+        choices.forEach(button => {
+            button.addEventListener('click', () => {
+                if (location.hash !== '#' + button.dataset.view) {
+                    location.hash = button.dataset.view;
+                }
+            });
+        });
+        window.addEventListener('hashchange', () => renderView());
+
+        const searchInput = document.getElementById('keyword-search');
+        const searchResults = document.getElementById('search-results');
+        const searchStatus = document.getElementById('search-status');
+
+        function searchContent() {
+            const terms = [...new Set(searchInput.value.toLowerCase().match(/[\p{L}\p{N}+#]+/gu) || [])];
+            searchResults.replaceChildren();
+            searchResults.hidden = true;
+            if (!terms.length) {
+                searchStatus.textContent = 'Search by keyword to find related work. Blog posts are coming soon.';
+                return;
+            }
+
+            // Index visible content from every entry, including future blog articles.
+            const entries = [...document.querySelectorAll('#projects article, #blogs article')];
+            const findings = entries.map((entry, index) => {
+                const title = entry.querySelector('h3, h2')?.textContent.trim() || 'Untitled';
+                const description = entry.querySelector('p')?.textContent.trim() || '';
+                const text = entry.textContent.toLowerCase();
+                const matched = terms.filter(term => text.includes(term));
+                const score = matched.reduce((total, term) => total + (title.toLowerCase().includes(term) ? 3 : 1), 0);
+                return { entry, index, title, description, matched, score };
+            }).filter(item => item.score > 0)
+              .sort((a, b) => b.matched.length - a.matched.length || b.score - a.score || a.index - b.index);
+
+            searchStatus.textContent = findings.length
+                ? findings.length + (findings.length === 1 ? ' finding' : ' findings') + ' matching your keywords. Blog posts are coming soon.'
+                : 'No findings. Try another keyword, such as GPU or learning. Blog posts are coming soon.';
+            findings.forEach(item => {
+                if (!item.entry.id) item.entry.id = 'search-entry-' + item.index;
+                const view = item.entry.closest('.content-panel').id;
+                const row = document.createElement('li');
+                const link = document.createElement('a');
+                link.href = '#' + view + '/' + item.entry.id;
+                link.textContent = item.title + ' ? ' + (view === 'projects' ? 'Projects' : 'Blogs');
+                const description = document.createElement('p');
+                description.textContent = item.description;
+                const matches = document.createElement('p');
+                matches.textContent = 'Matching keywords: ' + item.matched.join(', ');
+                row.append(link, description, matches);
+                searchResults.append(row);
+            });
+            searchResults.hidden = !findings.length;
+        }
+
+        searchInput.addEventListener('input', searchContent);
+        document.getElementById('search-form').addEventListener('submit', event => {
+            event.preventDefault();
+            searchContent();
+        });
+
+        renderView(false);
+    </script>
 </body>
 
 </html>
