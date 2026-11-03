@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="robots" content="noindex, follow">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#008CFF">
+    <meta name="description"
+        content="Swetank's World — AI, machine learning, GPU computing, and quantitative research projects.">
+    <title>Swetank's World | AI · ML · Research</title>
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            color-scheme: dark;
+            --bg: #050711;
+            --surface: #0a0e1b;
+            --card: #080d19;
+            --text: #f4f5ff;
+            --muted: #aab5d0;
+            --border: #242a43;
+
+            /* Electric blue palette */
+            --purple: #E8D5B7;
+            --purple-light: #F5E8D2;
+            --purple-dark: #B99A75;
+            --electric-glow: rgba(205, 166, 120, 0.28);
+
+            /* Project category colors */
+            --yellow: #ffe14a;
+            --green: #37f59b;
+            --teal: #27e8dc;
+            --red: #ff426d;
+            --blue: #39a9ff;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 90px;
+        }
+
+        body {
+            background:
+                radial-gradient(ellipse at 15% 10%,
+                    rgba(205, 166, 120, 0.10),
+                    transparent 38%),
+                radial-gradient(ellipse at 85% 25%,
+                    rgba(232, 213, 183, 0.07),
+                    transparent 38%),
+                #080807;
+
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            letter-spacing: -0.015em;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        button,
+        a {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .container {
+            width: min(1200px, calc(100% - 48px));
+            margin: 0 auto;
+        }
+
+        /* Navigation */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 20;
+            background: #050711ef;
+            border-bottom: 1px solid #ffffff13;
+            backdrop-filter: blur(18px);
+        }
+
+        .nav {
+            min-height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+        }
+
+        .brand {
+            flex-shrink: 0;
+            font-size: 1.05rem;
+            font-weight: 800;
+            letter-spacing: -.04em;
+        }
+
+        .brand span {
+            color: var(--purple);
+            text-shadow: 0 0 18px #ebd189c5;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+
+        .nav-links::-webkit-scrollbar {
+            display: none;
+        }
+
+        .nav-links a {
+            white-space: nowrap;
+            font-size: .68rem;
+            color: var(--muted);
+            transition: color .2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--purple-light);
+            text-shadow: 0 0 12px #008cff66;
+        }
+
+        /* Hero section */
+        .hero {
+            position: relative;
+            isolation: isolate;
+            display: grid;
+            grid-template-columns: 1.1fr .9fr;
+            align-items: center;
+            gap: 56px;
+            min-height: 380px;
+            padding-top: 58px;
+            padding-bottom: 62px;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            width: min(620px, 85vw);
+            height: 420px;
+            top: -10px;
+            left: 35%;
+            transform: translateX(-25%);
+            background: radial-gradient(circle,
+                    rgba(205, 165, 120, 0.404) 0%,
+                    rgba(0, 91, 255, 0.09) 42%,
+                    transparent 72%);
+            filter: blur(38px);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .eyebrow {
+            margin: 0 0 12px;
+            color: var(--purple-light);
+            font-size: .76rem;
+            font-weight: 700;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            text-shadow: 0 0 14px #e0d4b8e8;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: clamp(2.8rem, 6vw, 5rem);
+            line-height: 1.05;
+            letter-spacing: -.09em;
+            text-shadow: 0 0 30px rgba(0, 140, 255, 0.12);
+        }
+
+        h1 span {
+            color: #F5E8D2;
+            text-shadow:
+                0 0 12px rgba(232, 213, 183, 0.30),
+                0 0 30px rgba(185, 154, 117, 0.20);
+        }
+
+        .hero-subtitle {
+            margin: 18px 0 14px;
+            color: #b8c9ed;
+            font-size: clamp(1rem, 2vw, 1.25rem);
+        }
+
+        .hero-copy {
+            max-width: 530px;
+            color: var(--muted);
+            font-size: .96rem;
+        }
+
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 24px;
+        }
+
+        /* Buttons */
+        .button {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            min-height: 42px;
+            padding: 10px 20px;
+            border: 1px solid var(--border);
+            border-radius: 999px;
+            font-size: .84rem;
+            font-weight: 600;
+            transition:
+                transform .2s,
+                box-shadow .2s,
+                border-color .2s;
+        }
+
+        .button:hover {
+            transform: translateY(-2px);
+            border-color: var(--purple-light);
+            box-shadow:
+                0 0 12px rgba(0, 140, 255, 0.25),
+                0 0 28px rgba(0, 140, 255, 0.18);
+        }
+
+        .button.primary {
+            border-color: transparent;
+            background: linear-gradient(135deg, #008cff, #005bff);
+            color: #ffffff;
+            box-shadow:
+                0 0 14px rgba(0, 140, 255, 0.3),
+                0 0 30px rgba(0, 91, 255, 0.16);
+        }
+
+        .button.primary:hover {
+            box-shadow:
+                0 0 18px rgba(0, 140, 255, 0.5),
+                0 0 40px rgba(0, 91, 255, 0.25);
+        }
+
+        /* Portrait */
+        .portrait-wrap {
+            position: relative;
+            width: 100%;
+            max-width: 420px;
+            justify-self: end;
+            isolation: isolate;
+        }
+
+        .portrait-wrap::before {
+            content: "";
+            position: absolute;
+            inset: -16px;
+            z-index: -1;
+            border-radius: 30px;
+            background: var(--purple);
+            opacity: .2;
+            filter: blur(48px);
+        }
+
+        .portrait {
+            display: block;
+            width: 100%;
+            aspect-ratio: 1 / .84;
+            object-fit: cover;
+            object-position: center 35%;
+            /* filter: blur(3px) brightness(.76); */
+            filter: blur(5px);
+            opacity: 0.82;
+            border: 1px solid #008cff99;
+            border-radius: 12px;
+            background: #101020;
+            box-shadow:
+                0 0 20px rgba(0, 140, 255, 0.12),
+                0 0 45px rgba(0, 91, 255, 0.08);
+        }
+
+        /* Sections */
+        .section {
+            padding: 48px 0 54px;
+            border-top: 1px solid #ffffff13;
+        }
+
+        .section-heading {
+            display: flex;
+            align-items: end;
+            justify-content: space-between;
+            gap: 20px;
+            margin-bottom: 26px;
+        }
+
+        .section-heading .eyebrow {
+            margin-bottom: 5px;
+        }
+
+        h2 {
+            margin: 0;
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            letter-spacing: -.05em;
+            line-height: 1.2;
+        }
+
+        .section-intro {
+            margin: 10px 0 0;
+            color: var(--muted);
+            font-size: .92rem;
+        }
+
+        .path-note {
+            color: #8bb8e8;
+            font-size: .69rem;
+            letter-spacing: .15em;
+            white-space: nowrap;
+        }
+
+        /* Project cards */
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 16px;
+        }
+
+        .project-section {
+            --accent: var(--purple);
+            position: relative;
+            min-width: 0;
+            padding: 20px;
+            overflow: hidden;
+            border: 1px solid color-mix(in srgb,
+                    var(--accent) 42%,
+                    #22283d);
+            border-radius: 14px;
+            background:
+                radial-gradient(ellipse at 100% 0%,
+                    color-mix(in srgb, var(--accent) 9%, transparent),
+                    transparent 50%),
+                linear-gradient(145deg, #0a0e1c, #070a13);
+            transition:
+                transform .22s,
+                box-shadow .22s,
+                border-color .22s;
+            scroll-margin-top: 90px;
+        }
+
+        .project-section:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent);
+            box-shadow:
+                0 12px 35px color-mix(in srgb,
+                    var(--accent) 9%,
+                    transparent);
+        }
+
+        .project-section::after {
+            content: "";
+            position: absolute;
+            top: -50px;
+            right: -65px;
+            width: 180px;
+            height: 140px;
+            border: 1px solid color-mix(in srgb,
+                    var(--accent) 22%,
+                    transparent);
+            border-radius: 50%;
+            transform: rotate(-25deg);
+            pointer-events: none;
+        }
+
+        .purple {
+            --accent: var(--purple);
+        }
+
+        .yellow {
+            --accent: var(--yellow);
+        }
+
+        .green {
+            --accent: var(--green);
+        }
+
+        .teal {
+            --accent: var(--teal);
+        }
+
+        .red {
+            --accent: var(--red);
+        }
+
+        .blue {
+            --accent: var(--blue);
+        }
+
+        .project-icon {
+            display: grid;
+            place-items: center;
+            width: 48px;
+            height: 48px;
+            margin-bottom: 15px;
+            border: 1px solid color-mix(in srgb,
+                    var(--accent) 50%,
+                    transparent);
+            border-radius: 50%;
+            background: color-mix(in srgb,
+                    var(--accent) 11%,
+                    #090d19);
+            color: var(--accent);
+            font-size: 1.4rem;
+            box-shadow: 0 0 20px color-mix(in srgb,
+                    var(--accent) 12%,
+                    transparent);
+        }
+
+        .project-number {
+            color: var(--accent);
+            font-size: .75rem;
+            font-weight: 700;
+            letter-spacing: .14em;
+        }
+
+        .project-section h3 {
+            margin: 5px 0 7px;
+            font-size: 1.08rem;
+            line-height: 1.4;
+            letter-spacing: -.025em;
+        }
+
+        .project-section p {
+            min-height: 52px;
+            margin: 0;
+            color: var(--muted);
+            font-size: .84rem;
+        }
+
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 17px;
+            color: var(--accent);
+            font-size: .8rem;
+            font-weight: 700;
+        }
+
+        .project-link span {
+            transition: transform .2s;
+        }
+
+        .project-link:hover span {
+            transform: translateX(4px);
+        }
+
+        /* About section */
+        .about {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 28px;
+        }
+
+        .about-panel {
+            padding: 24px;
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            background: #080d19;
+            transition: border-color .2s, box-shadow .2s;
+        }
+
+        .about-panel:hover {
+            border-color: #008cff66;
+            box-shadow: 0 0 24px rgba(0, 140, 255, 0.06);
+        }
+
+        .about-panel h3 {
+            margin: 0 0 10px;
+        }
+
+        .about-panel p {
+            margin: 0;
+            color: var(--muted);
+            font-size: .9rem;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 16px;
+        }
+
+        .tag {
+            padding: 5px 10px;
+            border: 1px solid var(--border);
+            border-radius: 7px;
+            color: #c6cde1;
+            font-size: .74rem;
+            transition: border-color .2s, box-shadow .2s;
+        }
+
+        .tag:hover {
+            border-color: var(--purple);
+            box-shadow: 0 0 12px rgba(0, 140, 255, 0.12);
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid #ffffff18;
+            padding: 24px 0;
+        }
+
+        .footer-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 18px;
+            color: var(--muted);
+            font-size: .82rem;
+        }
+
+        .footer-links a:hover {
+            color: var(--purple-light);
+            text-shadow: 0 0 12px #008cff55;
+        }
+
+        .copyright {
+            color: #7d87a3;
+            font-size: .73rem;
+            text-align: center;
+            margin-top: 16px;
+        }
+
+        /* Responsive layout */
+        @media (max-width: 900px) {
+            .nav {
+                align-items: flex-start;
+                padding: 15px 0;
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .nav-links {
+                width: 100%;
+                padding-bottom: 2px;
+            }
+
+            .hero {
+                gap: 28px;
+            }
+
+            .projects {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .path-note {
+                display: none;
+            }
+        }
+
+        @media (max-width: 620px) {
+            .container {
+                width: min(100% - 30px, 520px);
+            }
+
+            .hero {
+                grid-template-columns: 1fr;
+                padding-top: 42px;
+                gap: 30px;
+            }
+
+            .portrait-wrap {
+                justify-self: start;
+                max-width: 100%;
+            }
+
+            .portrait {
+                aspect-ratio: 1.35 / 1;
+            }
+
+            .projects,
+            .about {
+                grid-template-columns: 1fr;
+            }
+
+            .project-section p {
+                min-height: 0;
+            }
+
+            .section {
+                padding: 38px 0;
+            }
+
+            .section-heading {
+                align-items: flex-start;
+            }
+
+            .footer-row {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+                scroll-behavior: auto !important;
+                transition-duration: .01ms !important;
+                animation-duration: .01ms !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <section class="container hero" id="home">
+            <div>
+                <p class="eyebrow">Explorer / Builder / Researcher</p>
+
+                <h1>Swetank's <span>World</span></h1>
+
+                <p class="hero-subtitle">
+                    AI | ML | GPU Computing | Quantitative Research
+                </p>
+
+                <p class="hero-copy">
+                    I build intelligent systems, explore data-driven insights,
+                    and work on projects that push the boundaries of machine
+                    learning and computation.
+                </p>
+
+            </div>
+
+            <div class="portrait-wrap">
+                <!-- Put your blurred portrait at assets/pfp.png -->
+                <img class="portrait" src="assets/pfp.png" alt="Blurred portrait"
+                    onerror="this.style.visibility='hidden'; this.parentElement.style.minHeight='260px'; this.parentElement.style.border='1px solid #008cff55'; this.parentElement.style.borderRadius='12px';">
+            </div>
+        </section>
+
+        <section class="section" id="projects">
+            <div class="container">
+                <div class="section-heading">
+                    <div>
+                        <p class="eyebrow">Explore Projects</p>
+                        <h2>Project Categories</h2>
+                        <p class="section-intro">
+                            Explore the different categories of projects and experiments I work on.
+                        </p>
+                    </div>
+
+                    <span class="path-note">IDEAS → MODELS → IMPACT</span>
+                </div>
+
+                <div class="projects">
+                    <article class="project-section purple" id="ai">
+                        <div class="project-icon" aria-hidden="true">✳</div>
+                        <span class="project-number">01 / AI</span>
+                        <h3>AI Applications</h3>
+                        <p>AI-powered applications, agents, and intelligent tools.</p>
+                        <a class="project-link" href="mailto:your.email@example.com?subject=AI%20Applications">
+                            View Projects <span>→</span>
+                        </a>
+                    </article>
+
+                    <article class="project-section yellow" id="rl">
+                        <div class="project-icon" aria-hidden="true">⌘</div>
+                        <span class="project-number">02 / RL</span>
+                        <h3>Reinforcement Learning</h3>
+                        <p>Agents, reward systems, and sequential decision-making.</p>
+                        <a class="project-link" href="mailto:your.email@example.com?subject=Reinforcement%20Learning">
+                            View Projects <span>→</span>
+                        </a>
+                    </article>
+
+                    <article class="project-section green" id="supervised">
+                        <div class="project-icon" aria-hidden="true">↗</div>
+                        <span class="project-number">03 / ML</span>
+                        <h3>Supervised Learning</h3>
+                        <p>Classification, regression, and predictive modeling.</p>
+                        <a class="project-link" href="mailto:your.email@example.com?subject=Supervised%20Learning">
+                            View Projects <span>→</span>
+                        </a>
+                    </article>
+
+                    <article class="project-section teal" id="nlp">
+                        <div class="project-icon" aria-hidden="true">▤</div>
+                        <span class="project-number">04 / NLP</span>
+                        <h3>Natural Language Processing</h3>
+                        <p>Language models, text analysis, and information extraction.</p>
+                        <a class="project-link" href="mailto:your.email@example.com?subject=NLP">
+                            View Projects <span>→</span>
+                        </a>
+                    </article>
+
+                    <article class="project-section red" id="vision">
+                        <div class="project-icon" aria-hidden="true">◎</div>
+                        <span class="project-number">05 / CV</span>
+                        <h3>Computer Vision</h3>
+                        <p>Image processing, object detection, and visual recognition.</p>
+                        <a class="project-link" href="mailto:your.email@example.com?subject=Computer%20Vision">
+                            View Projects <span>→</span>
+                        </a>
+                    </article>
+
+                    <article class="project-section purple" id="cuda">
+                        <div class="project-icon" aria-hidden="true">▦</div>
+                        <span class="project-number">06 / GPU</span>
+                        <h3>CUDA &amp; GPU Computing</h3>
+                        <p>GPU kernels, parallel algorithms, memory optimization, and benchmarking.</p>
+                        <a class="project-link" href="mailto:your.email@example.com?subject=CUDA">
+                            View Projects <span>→</span>
+                        </a>
+                    </article>
+
+                    <article class="project-section blue" id="quant">
+                        <div class="project-icon" aria-hidden="true">⌁</div>
+                        <span class="project-number">07 / QUANT</span>
+                        <h3>Quantitative Research</h3>
+                        <p>Statistical modeling, time-series analysis, optimization, and quantitative strategies.</p>
+                        <a class="project-link" href="mailto:your.email@example.com?subject=Quantitative%20Research">
+                            View Projects <span>→</span>
+                        </a>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="about">
+            <div class="container">
+                <div class="section-heading">
+                    <div>
+                        <p class="eyebrow">Behind the Work</p>
+                        <h2>About Me</h2>
+                        <p class="section-intro">
+                            A little about my technical interests and approach.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="about">
+                    <div class="about-panel">
+                        <h3>What I Explore</h3>
+                        <p>
+                            My interests span artificial intelligence, machine learning,
+                            efficient GPU computation, and quantitative research. I enjoy
+                            turning ideas into practical experiments and measurable results.
+                        </p>
+                    </div>
+
+                    <div class="about-panel">
+                        <h3>Tools &amp; Technologies</h3>
+                        <p>Replace these example tags with the tools you actually use.</p>
+
+                        <div class="tags">
+                            <span class="tag">Python</span>
+                            <span class="tag">PyTorch</span>
+                            <span class="tag">C++</span>
+                            <span class="tag">CUDA</span>
+                            <span class="tag">NumPy</span>
+                            <span class="tag">Pandas</span>
+                            <span class="tag">Git</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+
+</html>
