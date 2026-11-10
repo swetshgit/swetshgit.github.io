@@ -861,6 +861,8 @@
         .article-body table { display: block; overflow-x: auto; border-collapse: collapse; margin: 1.5rem 0; }
         .article-body th, .article-body td { border: 1px solid var(--border); padding: .7rem; text-align: left; min-width: 140px; }
         .article-body blockquote { margin: 1rem 0; padding-left: 1rem; border-left: 3px solid var(--purple); }
+        .featured-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        @media (max-width: 640px) { .featured-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 
@@ -899,6 +901,30 @@
 
 
 
+        <section class="section" id="featured-projects" aria-labelledby="featured-title">
+            <div class="container">
+                <div class="section-heading">
+                    <div>
+                        <p class="eyebrow">Selected Work</p>
+                        <h2 id="featured-title">Featured Projects</h2>
+                    </div>
+                </div>
+                <div class="projects featured-grid">
+                    <article class="project-section blue">
+                        <span class="project-number">CUDA / GPU COMPUTING</span>
+                        <h3>CUDA CO2</h3>
+                        <p>Custom CUDA kernels for sliding-window preprocessing in a vehicle CO2 prediction pipeline.</p>
+                        <a class="project-link" href="#wiki/co2-emissions-optimizer">Explore the project &rarr;</a>
+                    </article>
+                    <article class="project-section purple">
+                        <span class="project-number">AI / APPLICATIONS</span>
+                        <h3>Pneuma</h3>
+                        <p>A burnout-aware scheduling assistant that brings conversational planning, personal context, and a calendar together.</p>
+                        <a class="project-link" href="#wiki/pneumaai">Explore the project &rarr;</a>
+                    </article>
+                </div>
+            </div>
+        </section>
         <section class="container home-search" id="home-search" aria-labelledby="search-label">
             <form role="search" id="search-form">
                 <label class="eyebrow" id="search-label" for="keyword-search">Search projects &amp; blogs</label>
@@ -1182,6 +1208,7 @@
                 compactHeader.hidden = !view;
                 document.body.classList.toggle('detail-view', Boolean(view));
                 hero.hidden = Boolean(view);
+                document.getElementById('featured-projects').hidden = Boolean(view);
                 about.hidden = Boolean(view);
                 document.getElementById('home-search').hidden = Boolean(view);
                 panels.forEach(panel => {
