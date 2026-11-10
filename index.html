@@ -19,7 +19,7 @@
 
     <style>
         :root {
-            --page-scale: 0.6;
+            --page-scale: 0.75;
             color-scheme: dark;
             --bg: #050711;
             --surface: #0a0e1b;
@@ -814,20 +814,41 @@
             font-size: .9rem;
         }
 
-        .wiki-content { max-width: 850px; }
-        .wiki-list { padding-left: 24px; margin: 28px 0; }
-        .wiki-list li { padding: 12px 0; color: var(--purple); }
-        .wiki-list h3 { font-size: 1.1rem; margin: 0 0 8px; }
-        .wiki-list a { color: var(--purple-light); text-decoration: underline; text-underline-offset: 4px; }
-        .wiki-list p { color: var(--muted); margin: 0; overflow-wrap: anywhere; }
-        .wiki-list article:focus { outline: 2px solid var(--purple); outline-offset: 6px; }
+        .wiki-content {
+            max-width: 850px;
+        }
 
-        .project-article .wiki-content { line-height: 1.75; }
-        .project-article article > section { margin-top: 32px; }
-        .project-article h3 { margin: 0 0 10px; color: var(--purple-light); }
-        .writing-prompt { color: var(--muted); font-style: italic; }
-        .article-note { padding: 16px 20px; border-left: 3px solid var(--purple); background: var(--card); color: var(--muted); }
-        .project-article article a { color: var(--purple-light); text-decoration: underline; }
+        .wiki-list {
+            padding-left: 24px;
+            margin: 28px 0;
+        }
+
+        .wiki-list li {
+            padding: 12px 0;
+            color: var(--purple);
+        }
+
+        .wiki-list h3 {
+            font-size: 1.1rem;
+            margin: 0 0 8px;
+        }
+
+        .wiki-list a {
+            color: var(--purple-light);
+            text-decoration: underline;
+            text-underline-offset: 4px;
+        }
+
+        .wiki-list p {
+            color: var(--muted);
+            margin: 0;
+            overflow-wrap: anywhere;
+        }
+
+        .wiki-list article:focus {
+            outline: 2px solid var(--purple);
+            outline-offset: 6px;
+        }
     </style>
 </head>
 
@@ -1039,120 +1060,58 @@
             </div>
         </section>
 
-        <section class="section content-panel wiki-page" id="ai-wiki" aria-labelledby="ai-wiki-title" hidden><div class="container wiki-content"><p class="eyebrow">Project Wiki</p><h2 id="ai-wiki-title">AI Applications</h2><ul class="wiki-list"><li><article id="ai-wiki-1"><h3><a href="#article-pneumaai">PneumaAI</a></h3><p>https://www.pneumaai.app/</p></article></li><li><article id="ai-wiki-2"><h3><a href="#article-clear-path">Clear Path</a></h3><p>https://clear-path-ten.vercel.app/</p></article></li><li><article id="ai-wiki-3"><h3><a href="#article-project-capital">Project Capital (Hackathon project)</a></h3><p>https://devpost.com/software/project-capital</p></article></li></ul><a class="project-link" href="wiki/ai-applications.md">View Markdown source &rarr;</a><div class="home-action"><a class="button" href="#projects">Back to Projects</a></div><div class="home-action"><a class="button" href="#home">Return to Home &uarr;</a></div></div></section>
-        <section class="section content-panel wiki-page" id="cuda-wiki" aria-labelledby="cuda-wiki-title" hidden><div class="container wiki-content"><p class="eyebrow">Project Wiki</p><h2 id="cuda-wiki-title">CUDA &amp; GPU Computing</h2><ul class="wiki-list"><li><article id="cuda-wiki-1"><h3><a href="#article-cuda-introduction">Early introduction</a></h3><p>https://github.com/swetshgit/CUDA_Experiments</p></article></li><li><article id="cuda-wiki-2"><h3><a href="#article-co2-emissions-optimizer">CO2 emissions CNN-GRU and LSTM optimizer</a></h3><p>https://github.com/swetshgit/DL2025_CUDA_Exercise</p></article></li></ul><a class="project-link" href="wiki/cuda-gpu-computing.md">View Markdown source &rarr;</a><div class="home-action"><a class="button" href="#projects">Back to Projects</a></div><div class="home-action"><a class="button" href="#home">Return to Home &uarr;</a></div></div></section>
-
-        <section class="section content-panel project-article" id="article-pneumaai" aria-labelledby="article-pneumaai-title" hidden>
+        <section class="section content-panel wiki-page" id="ai-wiki" aria-labelledby="ai-wiki-title" hidden>
             <div class="container wiki-content">
-                <article>
-                    <p class="eyebrow">Project article / Draft template</p>
-                    <h2 id="article-pneumaai-title">PneumaAI</h2>
-                    <p class="section-intro writing-prompt">Write a one-sentence summary of the project.</p>
-                    <p class="article-note">Keep the sections that explain your thinking. Remove any that do not apply.</p>
-                    <section><h3>Introduction</h3><p class="writing-prompt">Describe what the project is, who it is for, and why you built it.</p></section>
-                    <section><h3>Problem statement</h3><p class="writing-prompt">Explain the problem or question you wanted to address, including constraints and goals.</p></section>
-                    <section><h3>Approach</h3><p class="writing-prompt">Describe your architecture, methods, models, and the reasoning behind your technical decisions.</p></section>
-                    <section><h3>Implementation</h3><p class="writing-prompt">Explain how you built it, including tools, frameworks, infrastructure, and your contributions.</p></section>
-                    <section><h3>Experiments and results</h3><p class="writing-prompt">Describe what you tested, the baselines or metrics you used, what worked, and what you learned. Add evidence where available.</p></section>
-                    <section><h3>Challenges and lessons</h3><p class="writing-prompt">Discuss difficulties, trade-offs, lessons learned, and what you would improve next.</p></section>
-                    <section><h3>Links and resources</h3>
-                        <ul><li><a href="https://www.pneumaai.app/" target="_blank" rel="noopener noreferrer">Live demo &rarr;</a></li></ul>
-                    </section>
-                </article>
-                <a class="project-link" href="wiki/projects/pneumaai.md">View Markdown source &rarr;</a>
-                <div class="home-action"><a class="button" href="#ai-wiki">Back to category</a></div>
+                <p class="eyebrow">Project Wiki</p>
+                <h2 id="ai-wiki-title">AI Applications</h2>
+                <ul class="wiki-list">
+                    <li>
+                        <article id="ai-wiki-1">
+                            <h3><a href="https://www.pneumaai.app/" target="_blank"
+                                    rel="noopener noreferrer">PneumaAI</a></h3>
+                            <p>https://www.pneumaai.app/</p>
+                        </article>
+                    </li>
+                    <li>
+                        <article id="ai-wiki-2">
+                            <h3><a href="https://clear-path-ten.vercel.app/" target="_blank"
+                                    rel="noopener noreferrer">Clear Path</a></h3>
+                            <p>https://clear-path-ten.vercel.app/</p>
+                        </article>
+                    </li>
+                    <li>
+                        <article id="ai-wiki-3">
+                            <h3><a href="https://devpost.com/software/project-capital" target="_blank"
+                                    rel="noopener noreferrer">Project Capital (Hackathon project)</a></h3>
+                            <p>https://devpost.com/software/project-capital</p>
+                        </article>
+                    </li>
+                </ul><a class="project-link" href="wiki/ai-applications.md">View Markdown source &rarr;</a>
+                <div class="home-action"><a class="button" href="#projects">Back to Projects</a></div>
                 <div class="home-action"><a class="button" href="#home">Return to Home &uarr;</a></div>
             </div>
         </section>
-
-        <section class="section content-panel project-article" id="article-clear-path" aria-labelledby="article-clear-path-title" hidden>
+        <section class="section content-panel wiki-page" id="cuda-wiki" aria-labelledby="cuda-wiki-title" hidden>
             <div class="container wiki-content">
-                <article>
-                    <p class="eyebrow">Project article / Draft template</p>
-                    <h2 id="article-clear-path-title">Clear Path</h2>
-                    <p class="section-intro writing-prompt">Write a one-sentence summary of the project.</p>
-                    <p class="article-note">Keep the sections that explain your thinking. Remove any that do not apply.</p>
-                    <section><h3>Introduction</h3><p class="writing-prompt">Describe what the project is, who it is for, and why you built it.</p></section>
-                    <section><h3>Problem statement</h3><p class="writing-prompt">Explain the problem or question you wanted to address, including constraints and goals.</p></section>
-                    <section><h3>Approach</h3><p class="writing-prompt">Describe your architecture, methods, models, and the reasoning behind your technical decisions.</p></section>
-                    <section><h3>Implementation</h3><p class="writing-prompt">Explain how you built it, including tools, frameworks, infrastructure, and your contributions.</p></section>
-                    <section><h3>Experiments and results</h3><p class="writing-prompt">Describe what you tested, the baselines or metrics you used, what worked, and what you learned. Add evidence where available.</p></section>
-                    <section><h3>Challenges and lessons</h3><p class="writing-prompt">Discuss difficulties, trade-offs, lessons learned, and what you would improve next.</p></section>
-                    <section><h3>Links and resources</h3>
-                        <ul><li><a href="https://clear-path-ten.vercel.app/" target="_blank" rel="noopener noreferrer">Live demo &rarr;</a></li></ul>
-                    </section>
-                </article>
-                <a class="project-link" href="wiki/projects/clear-path.md">View Markdown source &rarr;</a>
-                <div class="home-action"><a class="button" href="#ai-wiki">Back to category</a></div>
-                <div class="home-action"><a class="button" href="#home">Return to Home &uarr;</a></div>
-            </div>
-        </section>
-
-        <section class="section content-panel project-article" id="article-project-capital" aria-labelledby="article-project-capital-title" hidden>
-            <div class="container wiki-content">
-                <article>
-                    <p class="eyebrow">Project article / Draft template</p>
-                    <h2 id="article-project-capital-title">Project Capital (Hackathon project)</h2>
-                    <p class="section-intro writing-prompt">Write a one-sentence summary of the project.</p>
-                    <p class="article-note">Keep the sections that explain your thinking. Remove any that do not apply.</p>
-                    <section><h3>Introduction</h3><p class="writing-prompt">Describe what the project is, who it is for, and why you built it.</p></section>
-                    <section><h3>Problem statement</h3><p class="writing-prompt">Explain the problem or question you wanted to address, including constraints and goals.</p></section>
-                    <section><h3>Approach</h3><p class="writing-prompt">Describe your architecture, methods, models, and the reasoning behind your technical decisions.</p></section>
-                    <section><h3>Implementation</h3><p class="writing-prompt">Explain how you built it, including tools, frameworks, infrastructure, and your contributions.</p></section>
-                    <section><h3>Experiments and results</h3><p class="writing-prompt">Describe what you tested, the baselines or metrics you used, what worked, and what you learned. Add evidence where available.</p></section>
-                    <section><h3>Challenges and lessons</h3><p class="writing-prompt">Discuss difficulties, trade-offs, lessons learned, and what you would improve next.</p></section>
-                    <section><h3>Links and resources</h3>
-                        <ul><li><a href="https://devpost.com/software/project-capital" target="_blank" rel="noopener noreferrer">Devpost &rarr;</a></li></ul>
-                    </section>
-                </article>
-                <a class="project-link" href="wiki/projects/project-capital.md">View Markdown source &rarr;</a>
-                <div class="home-action"><a class="button" href="#ai-wiki">Back to category</a></div>
-                <div class="home-action"><a class="button" href="#home">Return to Home &uarr;</a></div>
-            </div>
-        </section>
-
-        <section class="section content-panel project-article" id="article-cuda-introduction" aria-labelledby="article-cuda-introduction-title" hidden>
-            <div class="container wiki-content">
-                <article>
-                    <p class="eyebrow">Project article / Draft template</p>
-                    <h2 id="article-cuda-introduction-title">Early introduction</h2>
-                    <p class="section-intro writing-prompt">Write a one-sentence summary of the project.</p>
-                    <p class="article-note">Keep the sections that explain your thinking. Remove any that do not apply.</p>
-                    <section><h3>Introduction</h3><p class="writing-prompt">Describe what the project is, who it is for, and why you built it.</p></section>
-                    <section><h3>Problem statement</h3><p class="writing-prompt">Explain the problem or question you wanted to address, including constraints and goals.</p></section>
-                    <section><h3>Approach</h3><p class="writing-prompt">Describe your architecture, methods, models, and the reasoning behind your technical decisions.</p></section>
-                    <section><h3>Implementation</h3><p class="writing-prompt">Explain how you built it, including tools, frameworks, infrastructure, and your contributions.</p></section>
-                    <section><h3>Experiments and results</h3><p class="writing-prompt">Describe what you tested, the baselines or metrics you used, what worked, and what you learned. Add evidence where available.</p></section>
-                    <section><h3>Challenges and lessons</h3><p class="writing-prompt">Discuss difficulties, trade-offs, lessons learned, and what you would improve next.</p></section>
-                    <section><h3>Links and resources</h3>
-                        <ul><li><a href="https://github.com/swetshgit/CUDA_Experiments" target="_blank" rel="noopener noreferrer">GitHub &rarr;</a></li></ul>
-                    </section>
-                </article>
-                <a class="project-link" href="wiki/projects/cuda-introduction.md">View Markdown source &rarr;</a>
-                <div class="home-action"><a class="button" href="#cuda-wiki">Back to category</a></div>
-                <div class="home-action"><a class="button" href="#home">Return to Home &uarr;</a></div>
-            </div>
-        </section>
-
-        <section class="section content-panel project-article" id="article-co2-emissions-optimizer" aria-labelledby="article-co2-emissions-optimizer-title" hidden>
-            <div class="container wiki-content">
-                <article>
-                    <p class="eyebrow">Project article / Draft template</p>
-                    <h2 id="article-co2-emissions-optimizer-title">CO2 emissions CNN-GRU and LSTM optimizer</h2>
-                    <p class="section-intro writing-prompt">Write a one-sentence summary of the project.</p>
-                    <p class="article-note">Keep the sections that explain your thinking. Remove any that do not apply.</p>
-                    <section><h3>Introduction</h3><p class="writing-prompt">Describe what the project is, who it is for, and why you built it.</p></section>
-                    <section><h3>Problem statement</h3><p class="writing-prompt">Explain the problem or question you wanted to address, including constraints and goals.</p></section>
-                    <section><h3>Approach</h3><p class="writing-prompt">Describe your architecture, methods, models, and the reasoning behind your technical decisions.</p></section>
-                    <section><h3>Implementation</h3><p class="writing-prompt">Explain how you built it, including tools, frameworks, infrastructure, and your contributions.</p></section>
-                    <section><h3>Experiments and results</h3><p class="writing-prompt">Describe what you tested, the baselines or metrics you used, what worked, and what you learned. Add evidence where available.</p></section>
-                    <section><h3>Challenges and lessons</h3><p class="writing-prompt">Discuss difficulties, trade-offs, lessons learned, and what you would improve next.</p></section>
-                    <section><h3>Links and resources</h3>
-                        <ul><li><a href="https://github.com/swetshgit/DL2025_CUDA_Exercise" target="_blank" rel="noopener noreferrer">GitHub &rarr;</a></li></ul>
-                    </section>
-                </article>
-                <a class="project-link" href="wiki/projects/co2-emissions-optimizer.md">View Markdown source &rarr;</a>
-                <div class="home-action"><a class="button" href="#cuda-wiki">Back to category</a></div>
+                <p class="eyebrow">Project Wiki</p>
+                <h2 id="cuda-wiki-title">CUDA &amp; GPU Computing</h2>
+                <ul class="wiki-list">
+                    <li>
+                        <article id="cuda-wiki-1">
+                            <h3><a href="https://github.com/swetshgit/CUDA_Experiments" target="_blank"
+                                    rel="noopener noreferrer">Early introduction</a></h3>
+                            <p>https://github.com/swetshgit/CUDA_Experiments</p>
+                        </article>
+                    </li>
+                    <li>
+                        <article id="cuda-wiki-2">
+                            <h3><a href="https://github.com/swetshgit/DL2025_CUDA_Exercise" target="_blank"
+                                    rel="noopener noreferrer">CO2 emissions CNN-GRU and LSTM optimizer</a></h3>
+                            <p>https://github.com/swetshgit/DL2025_CUDA_Exercise</p>
+                        </article>
+                    </li>
+                </ul><a class="project-link" href="wiki/cuda-gpu-computing.md">View Markdown source &rarr;</a>
+                <div class="home-action"><a class="button" href="#projects">Back to Projects</a></div>
                 <div class="home-action"><a class="button" href="#home">Return to Home &uarr;</a></div>
             </div>
         </section>
@@ -1171,7 +1130,7 @@
         function renderView(animate = true) {
             clearTimeout(pending);
             const [route, resultId] = location.hash.slice(1).split('/');
-            const view = panels.some(panel => panel.id === route) ? route : null;
+            const view = ['projects', 'blogs', 'ai-wiki', 'cuda-wiki'].includes(route) ? route : null;
             main.classList.toggle('is-switching', animate && !reducedMotion.matches);
 
             pending = setTimeout(() => {
@@ -1185,7 +1144,7 @@
                     panel.classList.remove('is-fading');
                 });
                 choices.forEach(button => {
-                    button.setAttribute('aria-pressed', String(button.dataset.view === view || (view && view !== 'blogs' && button.dataset.view === 'projects')));
+                    button.setAttribute('aria-pressed', String(button.dataset.view === view || (view?.endsWith('-wiki') && button.dataset.view === 'projects')));
                 });
                 // Reset the new view instantly; navigation itself uses a fade.
                 window.scrollTo({ top: 0, behavior: 'instant' });
@@ -1226,9 +1185,9 @@
             }
 
             // Index visible content from every entry, including future blog articles.
-            const entries = [...document.querySelectorAll('#projects article, #blogs article, .wiki-page article, .project-article article')];
+            const entries = [...document.querySelectorAll('#projects article, #blogs article, .wiki-page article')];
             const findings = entries.map((entry, index) => {
-                const title = (entry.querySelector('h2') || entry.querySelector('h3'))?.textContent.trim() || 'Untitled';
+                const title = entry.querySelector('h3, h2')?.textContent.trim() || 'Untitled';
                 const description = entry.querySelector('p')?.textContent.trim() || '';
                 const text = entry.textContent.toLowerCase();
                 const matched = terms.filter(term => text.includes(term));
