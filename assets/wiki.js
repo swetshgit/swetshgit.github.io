@@ -1,5 +1,6 @@
 // Register completed articles here; drafts stay out of public navigation.
 const wikiArticles = {
+    'co2-emissions-optimizer': { title: 'CO2 emissions: a CUDA preprocessing exercise', source: 'wiki/projects/co2-emissions-optimizer.md' },
     pneumaai: { title: 'PneumaAI', source: 'wiki/projects/pneumaai.md' },
 };
 let wikiRequest = 0;
