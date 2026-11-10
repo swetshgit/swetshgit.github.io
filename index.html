@@ -849,6 +849,18 @@
             outline: 2px solid var(--purple);
             outline-offset: 6px;
         }
+        .article-body { line-height: 1.8; overflow-wrap: anywhere; }
+        .article-body h2 { font-size: clamp(1.4rem, 3vw, 2rem); margin: 2.5rem 0 1rem; }
+        .article-body h3 { margin-top: 2rem; }
+        .article-body p, .article-body ul, .article-body ol { margin: 1rem 0; }
+        .article-body ul, .article-body ol { padding-left: 1.5rem; }
+        .article-body li { margin: .5rem 0; }
+        .article-body a, .blog-empty h3 a { color: var(--purple-light); text-decoration: underline; text-underline-offset: 4px; }
+        .article-body code { background: var(--card); padding: .15em .35em; border-radius: 4px; font-size: .9em; }
+        .article-body pre { overflow-x: auto; padding: 1rem; background: var(--card); }
+        .article-body table { display: block; overflow-x: auto; border-collapse: collapse; margin: 1.5rem 0; }
+        .article-body th, .article-body td { border: 1px solid var(--border); padding: .7rem; text-align: left; min-width: 140px; }
+        .article-body blockquote { margin: 1rem 0; padding-left: 1rem; border-left: 3px solid var(--purple); }
     </style>
 </head>
 
@@ -897,7 +909,7 @@
                 </div>
             </form>
             <p id="search-status" class="section-intro" role="status" aria-live="polite">Search by keyword to find
-                related work. Blog posts are coming soon.</p>
+                related work.</p>
             <ul id="search-results" class="search-results" aria-label="Search findings" hidden></ul>
         </section>
 
@@ -1012,8 +1024,12 @@
                     </div>
                 </div>
                 <div class="blog-empty">
-                    <h3>Coming soon</h3>
-                    <p>New posts will appear here.</p>
+                    <article id="pneumaai-post">
+                        <p class="eyebrow">Project Wiki / AI Applications</p>
+                        <h3><a href="#wiki/pneumaai">PneumaAI: burnout-aware scheduling</a></h3>
+                        <p>How conversational planning, personal context, and a persistent calendar come together in PneumaAI. Explore the architecture, implemented features, and engineering trade-offs.</p>
+                        <a class="project-link" href="#wiki/pneumaai">Read the wiki &rarr;</a>
+                    </article>
                 </div>
             </div>
             <div class="container home-action">
@@ -1069,7 +1085,7 @@
                         <article id="ai-wiki-1">
                             <h3><a href="https://www.pneumaai.app/" target="_blank"
                                     rel="noopener noreferrer">PneumaAI</a></h3>
-                            <p>https://www.pneumaai.app/</p>
+                            <p>A burnout-aware scheduling assistant with conversational planning and a personal calendar.</p><a class="project-link" href="#wiki/pneumaai">Read the project wiki &rarr;</a>
                         </article>
                     </li>
                     <li>
@@ -1115,8 +1131,20 @@
                 <div class="home-action"><a class="button" href="#home">Return to Home &uarr;</a></div>
             </div>
         </section>
+        <section class="section content-panel wiki-page" id="wiki" aria-labelledby="wiki-title" hidden>
+            <div class="container wiki-content">
+                <p class="eyebrow">Project Wiki</p>
+                <h2 id="wiki-title">PneumaAI</h2>
+                <p id="wiki-status" role="status" aria-live="polite"></p>
+                <div id="wiki-article" class="article-body"></div>
+                <p><a id="wiki-source" class="project-link" href="wiki/projects/pneumaai.md">View Markdown source &rarr;</a></p>
+                <div class="home-action"><a class="button" href="#blogs">Back to Blogs</a> <a class="button" href="#ai-wiki">Back to AI Applications</a></div>
+            </div>
+        </section>
     </main>
 
+    <script src="assets/marked.min.js"></script>
+    <script src="assets/wiki.js"></script>
     <script>
         const choices = [...document.querySelectorAll('[data-view]')];
         const panels = [...document.querySelectorAll('.content-panel')];
@@ -1130,7 +1158,8 @@
         function renderView(animate = true) {
             clearTimeout(pending);
             const [route, resultId] = location.hash.slice(1).split('/');
-            const view = ['projects', 'blogs', 'ai-wiki', 'cuda-wiki'].includes(route) ? route : null;
+            const view = ['projects', 'blogs', 'ai-wiki', 'cuda-wiki', 'wiki'].includes(route) ? route : null;
+            if (view === 'wiki') loadWikiArticle(resultId);
             main.classList.toggle('is-switching', animate && !reducedMotion.matches);
 
             pending = setTimeout(() => {
@@ -1144,7 +1173,7 @@
                     panel.classList.remove('is-fading');
                 });
                 choices.forEach(button => {
-                    button.setAttribute('aria-pressed', String(button.dataset.view === view || (view?.endsWith('-wiki') && button.dataset.view === 'projects')));
+                    button.setAttribute('aria-pressed', String(button.dataset.view === view || ((view === 'wiki' || view?.endsWith('-wiki')) && button.dataset.view === 'projects')));
                 });
                 // Reset the new view instantly; navigation itself uses a fade.
                 window.scrollTo({ top: 0, behavior: 'instant' });
@@ -1180,7 +1209,7 @@
             searchResults.replaceChildren();
             searchResults.hidden = true;
             if (!terms.length) {
-                searchStatus.textContent = 'Search by keyword to find related work. Blog posts are coming soon.';
+                searchStatus.textContent = 'Search by keyword to find related work.';
                 return;
             }
 
@@ -1197,8 +1226,8 @@
                 .sort((a, b) => b.matched.length - a.matched.length || b.score - a.score || a.index - b.index);
 
             searchStatus.textContent = findings.length
-                ? findings.length + (findings.length === 1 ? ' finding' : ' findings') + ' matching your keywords. Blog posts are coming soon.'
-                : 'No findings. Try another keyword, such as GPU or learning. Blog posts are coming soon.';
+                ? findings.length + (findings.length === 1 ? ' finding' : ' findings') + ' matching your keywords.'
+                : 'No findings. Try another keyword, such as GPU or learning.';
             findings.forEach(item => {
                 if (!item.entry.id) item.entry.id = 'search-entry-' + item.index;
                 const view = item.entry.closest('.content-panel').id;
