@@ -1,5 +1,6 @@
 // Register completed articles here; drafts stay out of public navigation.
 const wikiArticles = {
+    'clear-path': { title: 'Clear Path', source: 'wiki/projects/clear-path.md' },
     'co2-emissions-optimizer': { title: 'CO2 emissions: a CUDA preprocessing exercise', source: 'wiki/projects/co2-emissions-optimizer.md' },
     pneumaai: { title: 'PneumaAI', source: 'wiki/projects/pneumaai.md' },
 };
