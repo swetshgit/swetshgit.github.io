@@ -978,7 +978,7 @@
                         <span class="project-number">02 / RL</span>
                         <h3>Reinforcement Learning</h3>
                         <p>Agents, reward systems, and sequential decision-making.</p>
-                        <a class="project-link" href="mailto:your.email@example.com?subject=Reinforcement%20Learning">
+                        <a class="project-link" href="#coming-soon/reinforcement-learning">
                             View Projects <span>→</span>
                         </a>
                     </article>
@@ -988,7 +988,7 @@
                         <span class="project-number">03 / ML</span>
                         <h3>Supervised Learning</h3>
                         <p>Classification, regression, and predictive modeling.</p>
-                        <a class="project-link" href="mailto:your.email@example.com?subject=Supervised%20Learning">
+                        <a class="project-link" href="#coming-soon/supervised-learning">
                             View Projects <span>→</span>
                         </a>
                     </article>
@@ -998,7 +998,7 @@
                         <span class="project-number">04 / NLP</span>
                         <h3>Natural Language Processing</h3>
                         <p>Language models, text analysis, and information extraction.</p>
-                        <a class="project-link" href="mailto:your.email@example.com?subject=NLP">
+                        <a class="project-link" href="#coming-soon/nlp">
                             View Projects <span>→</span>
                         </a>
                     </article>
@@ -1008,7 +1008,7 @@
                         <span class="project-number">05 / CV</span>
                         <h3>Computer Vision</h3>
                         <p>Image processing, object detection, and visual recognition.</p>
-                        <a class="project-link" href="mailto:your.email@example.com?subject=Computer%20Vision">
+                        <a class="project-link" href="#coming-soon/computer-vision">
                             View Projects <span>→</span>
                         </a>
                     </article>
@@ -1028,7 +1028,7 @@
                         <span class="project-number">07 / QUANT</span>
                         <h3>Quantitative Research</h3>
                         <p>Statistical modeling, time-series analysis, optimization, and quantitative strategies.</p>
-                        <a class="project-link" href="mailto:your.email@example.com?subject=Quantitative%20Research">
+                        <a class="project-link" href="#coming-soon/quantitative-research">
                             View Projects <span>→</span>
                         </a>
                     </article>
@@ -1183,6 +1183,14 @@
                 <div class="home-action"><a class="button" href="#blogs">Back to Blogs</a> <a class="button" href="#projects">Back to Projects</a></div>
             </div>
         </section>
+        <section class="section content-panel" id="coming-soon" aria-labelledby="coming-soon-title" hidden>
+            <div class="container wiki-content">
+                <p class="eyebrow" id="coming-soon-topic">More to Explore</p>
+                <h2 id="coming-soon-title">Coming soon</h2>
+                <p class="section-intro">Projects and write-ups for this area are on the way. Explore the featured work in the meantime.</p>
+                <div class="home-action"><a class="button" href="#projects">Back to Projects</a> <a class="button" href="#home">Featured Projects &uarr;</a></div>
+            </div>
+        </section>
     </main>
 
     <script src="assets/marked.min.js"></script>
@@ -1200,8 +1208,18 @@
         function renderView(animate = true) {
             clearTimeout(pending);
             const [route, resultId] = location.hash.slice(1).split('/');
-            const view = ['projects', 'blogs', 'ai-wiki', 'cuda-wiki', 'wiki'].includes(route) ? route : null;
+            const view = ['projects', 'blogs', 'ai-wiki', 'cuda-wiki', 'wiki', 'coming-soon'].includes(route) ? route : null;
             if (view === 'wiki') loadWikiArticle(resultId);
+            if (view === 'coming-soon') {
+                const topics = {
+                    'reinforcement-learning': 'Reinforcement Learning',
+                    'supervised-learning': 'Supervised Learning',
+                    nlp: 'Natural Language Processing',
+                    'computer-vision': 'Computer Vision',
+                    'quantitative-research': 'Quantitative Research',
+                };
+                document.getElementById('coming-soon-topic').textContent = topics[resultId] || 'More to Explore';
+            }
             main.classList.toggle('is-switching', animate && !reducedMotion.matches);
 
             pending = setTimeout(() => {
@@ -1216,7 +1234,7 @@
                     panel.classList.remove('is-fading');
                 });
                 choices.forEach(button => {
-                    button.setAttribute('aria-pressed', String(button.dataset.view === view || ((view === 'wiki' || view?.endsWith('-wiki')) && button.dataset.view === 'projects')));
+                    button.setAttribute('aria-pressed', String(button.dataset.view === view || ((view === 'wiki' || view === 'coming-soon' || view?.endsWith('-wiki')) && button.dataset.view === 'projects')));
                 });
                 // Reset the new view instantly; navigation itself uses a fade.
                 window.scrollTo({ top: 0, behavior: 'instant' });
